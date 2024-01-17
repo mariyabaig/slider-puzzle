@@ -113,6 +113,20 @@ export default function App() {
     }
   };
 
+   const solvePuzzle = () => {
+     // Implement the solving algorithm here
+     // You can use A* algorithm or any other suitable algorithm
+     // For simplicity, let's assume a dummy solution here
+     const solvedPuzzle = [
+       [1, 2, 3],
+       [4, 5, 6],
+       [7, 8, 0],
+     ];
+
+     setPuzzle(solvedPuzzle);
+     setComplete(true);
+   };
+
   const checkCompletion = (puzzle) => {
     if (flattenArray(puzzle).join("") === "123456780") {
       setComplete(true);
@@ -195,6 +209,7 @@ export default function App() {
       <p style={{ textAlign: "center", marginTop: "20px" }}>
         <button
           style={{
+            margin: "2px",
             padding: "10px 20px",
             fontSize: "1rem",
             backgroundColor: "#4CAF50",
@@ -208,6 +223,22 @@ export default function App() {
           }}
         >
           Play Again
+        </button>
+        <button
+          style={{
+            margin: "2px",
+            padding: "10px 20px",
+            fontSize: "1rem",
+            backgroundColor: "#4CAF50",
+            color: "white",
+            border: "none",
+            borderRadius: "5px",
+            cursor: complete ? "not-allowed" : "pointer",
+            marginRight: "10px",
+          }}
+          onClick={() => solvePuzzle()}
+        >
+          Solve Yourself
         </button>
       </p>
     </div>
