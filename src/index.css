@@ -110,3 +110,9 @@
   background-color: #ccc; /* Light gray for disabled button */
   cursor: not-allowed;
 }
+
+.congratulation {
+  font-size: 24px;
+  color: #007bff;
+  text-align: center;
+}

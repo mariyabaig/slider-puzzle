@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Board from "./components/Board";
 import { getShuffledPuzzle, isSolvable } from "./utils"; // Import necessary utility functions
 import Rules from "./components/Rules";
+import ConfettiExplosion from "react-confetti-explosion";
+
 
 const App = () => {
   const [puzzle, setPuzzle] = useState([]);
@@ -31,7 +33,6 @@ const App = () => {
 
   const handleComplete = () => {
     setComplete(true);
-    alert("You won")
   };
 
   const handleReset = () => {
@@ -41,17 +42,25 @@ const App = () => {
   };
 
   return (
-    <div className="App">
-      <Board
-        onMove={handleMove}
-        onComplete={handleComplete}
-        onReset={handleReset}
-        moves={moves}
-        puzzle={puzzle}
-        complete={complete}
-      />
-      <Rules />
-    </div>
+    <>
+      {complete && (
+        <>
+          <ConfettiExplosion />
+          <span className="congratulation">You did it!</span>
+        </>
+      )}
+      <div className="App">
+        <Board
+          onMove={handleMove}
+          onComplete={handleComplete}
+          onReset={handleReset}
+          moves={moves}
+          puzzle={puzzle}
+          complete={complete}
+        />
+        <Rules />
+      </div>
+    </>
   );
 };
 
