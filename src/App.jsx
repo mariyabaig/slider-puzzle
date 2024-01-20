@@ -1,4 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import image1 from "./assets/image_part_001.jpg";
+import image2 from "./assets/image_part_002.jpg";
+import image3 from "./assets/image_part_003.jpg";
+import image4 from "./assets/image_part_004.jpg";
+import image5 from "./assets/image_part_005.jpg";
+import image6 from "./assets/image_part_006.jpg";
+import image7 from "./assets/image_part_007.jpg";
+import image8 from "./assets/image_part_008.jpg";
+import image9 from "./assets/image_part_009.jpg";
+
+import image10 from "./assets/image_part_010.jpg";
 
 const getShuffledPuzzle = () => {
   const values = [0, 1, 2, 3, 4, 5, 6, 7, 8];
@@ -49,61 +60,68 @@ const isSolvable = (puzzle) => {
 };
 
 const getPuzzle = () => {
-  const solvedPuzzle = [
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 0],
-  ];
+  let puzzle;
+  do {
+    puzzle = getShuffledPuzzle();
 
-  let puzzle = getShuffledPuzzle();
+    // Swap the positions of 0 and the last number to make it closer to the solved state
+    const zeroPosition = puzzle.flat().indexOf(0);
+    const lastNumber = puzzle.flat().length - 1;
 
-  // Swap the positions of 0 and the last number to make it closer to the solved state
-  const zeroPosition = puzzle.flat().indexOf(0);
-  const lastNumber = puzzle.flat().length - 1;
-
-  puzzle = puzzle.map((row) => row.slice());
-  puzzle[Math.floor(zeroPosition / 3)][zeroPosition % 3] =
-    puzzle[Math.floor(lastNumber / 3)][lastNumber % 3];
-  puzzle[Math.floor(lastNumber / 3)][lastNumber % 3] = 0;
+    puzzle = puzzle.map((row) => row.slice());
+    puzzle[Math.floor(zeroPosition / 3)][zeroPosition % 3] =
+      puzzle[Math.floor(lastNumber / 3)][lastNumber % 3];
+    puzzle[Math.floor(lastNumber / 3)][lastNumber % 3] = 0;
+  } while (!isSolvable(puzzle));
 
   return puzzle;
 };
 
-export default function App() {
-  const [puzzle, setPuzzle] = React.useState([]);
-  const [complete, setComplete] = React.useState(false);
-  const [moves, setMoves] = React.useState(0);
 
-  React.useEffect(() => {
+const App = () => {
+  const [puzzle, setPuzzle] = useState([]);
+  const [complete, setComplete] = useState(false);
+  const [moves, setMoves] = useState(0);
+const getImageSource = (value) => {
+  switch (value) {
+    case 1:
+      return image1;
+    case 2:
+      return image2;
+    case 3:
+      return image3;
+    case 4:
+      return image4;
+    case 5:
+      return image5;
+    case 6:
+      return image6;
+    case 7:
+      return image7;
+    case 8:
+      return image8;
+    case 0:
+      return image10;
+    default:
+      return null;
+  }
+};
+
+
+
+  useEffect(() => {
     setPuzzle(getPuzzle());
   }, []);
 
   const movePiece = (x, y) => {
     if (!complete) {
-      if (checkNeighbours(x, y) || checkNeighbours(x, y, 2)) {
-        const emptySlot = checkNeighbours(x, y) || checkNeighbours(x, y, 2);
+      const emptySlot = checkNeighbours(x, y) || checkNeighbours(x, y, 2);
 
-        const newPuzzle = puzzle.map((row) => row.slice());
+      if (emptySlot) {
+        const newPuzzle = puzzle.map((row) => [...row]);
 
-        if (x === emptySlot.x && y < emptySlot.y) {
-          newPuzzle[emptySlot.x][emptySlot.y] = puzzle[x][y + 1];
-          newPuzzle[x][y + 1] = newPuzzle[x][y];
-          newPuzzle[x][y] = 0;
-        } else if (x === emptySlot.x && y > emptySlot.y) {
-          newPuzzle[emptySlot.x][emptySlot.y] = puzzle[x][y - 1];
-          newPuzzle[x][y - 1] = newPuzzle[x][y];
-          newPuzzle[x][y] = 0;
-        }
-
-        if (y === emptySlot.y && x < emptySlot.x) {
-          newPuzzle[emptySlot.x][emptySlot.y] = puzzle[x + 1][y];
-          newPuzzle[x + 1][y] = newPuzzle[x][y];
-          newPuzzle[x][y] = 0;
-        } else if (y === emptySlot.y && x > emptySlot.x) {
-          newPuzzle[emptySlot.x][emptySlot.y] = puzzle[x - 1][y];
-          newPuzzle[x - 1][y] = newPuzzle[x][y];
-          newPuzzle[x][y] = 0;
-        }
+        newPuzzle[emptySlot.x][emptySlot.y] = puzzle[x][y];
+        newPuzzle[x][y] = 0;
 
         setPuzzle(newPuzzle);
         setMoves(moves + 1);
@@ -113,19 +131,19 @@ export default function App() {
     }
   };
 
-   const solvePuzzle = () => {
-     // Implement the solving algorithm here
-     // You can use A* algorithm or any other suitable algorithm
-     // For simplicity, let's assume a dummy solution here
-     const solvedPuzzle = [
-       [1, 2, 3],
-       [4, 5, 6],
-       [7, 8, 0],
-     ];
+  const solvePuzzle = () => {
+    // Implement the solving algorithm here
+    // You can use A* algorithm or any other suitable algorithm
+    // For simplicity, let's assume a dummy solution here
+    const solvedPuzzle = [
+      [1, 2, 3],
+      [4, 5, 6],
+      [7, 8, 0],
+    ];
 
-     setPuzzle(solvedPuzzle);
-     setComplete(true);
-   };
+    setPuzzle(solvedPuzzle);
+    setComplete(true);
+  };
 
   const checkCompletion = (puzzle) => {
     if (flattenArray(puzzle).join("") === "123456780") {
@@ -134,22 +152,14 @@ export default function App() {
   };
 
   const checkNeighbours = (x, y, d = 1) => {
-    const neighbours = [];
+    const neighbours = [
+      puzzle[x - d]?.[y] === 0 && { x: x - d, y },
+      puzzle[x][y + d] === 0 && { x, y: y + d },
+      puzzle[x + d]?.[y] === 0 && { x: x + d, y },
+      puzzle[x][y - d] === 0 && { x, y: y - d },
+    ];
 
-    if (puzzle[x][y] !== 0) {
-      neighbours.push(
-        puzzle[x - d] && puzzle[x - d][y] === 0 && { x: x - d, y: y }
-      );
-      neighbours.push(puzzle[x][y + d] === 0 && { x: x, y: y + d });
-      neighbours.push(
-        puzzle[x + d] && puzzle[x + d][y] === 0 && { x: x + d, y: y }
-      );
-      neighbours.push(puzzle[x][y - d] === 0 && { x: x, y: y - d });
-    }
-
-    const emptySlot = neighbours.find((el) => typeof el === "object");
-
-    return emptySlot;
+    return neighbours.find((el) => el);
   };
 
   const resetPuzzle = () => {
@@ -160,11 +170,11 @@ export default function App() {
 
   return (
     <div className="App">
-      {<h3>Moves: {moves}</h3>}
+      <h3>Moves: {moves}</h3>
       <div
         style={{
           display: "inline-block",
-          backgroundColor: "oldlace",
+          backgroundColor: "black",
           border: `5px solid ${complete ? "black" : "black"}`,
           borderRadius: 5,
           padding: 5,
@@ -196,9 +206,11 @@ export default function App() {
                     userSelect: "none",
                   }}
                 >
-                  <span style={{ fontSize: "2rem", fontWeight: "bold" }}>
-                    {col !== 0 && col}
-                  </span>
+                  <img
+                    src={getImageSource(col)}
+                    alt={col !== 0 && col.toString()}
+                    style={{ width: "100%", height: "100%", borderRadius: 5 }}
+                  />
                 </div>
               );
             })}
@@ -218,9 +230,7 @@ export default function App() {
             borderRadius: "5px",
             cursor: complete ? "not-allowed" : "pointer",
           }}
-          onClick={() => {
-            resetPuzzle();
-          }}
+          onClick={() => resetPuzzle()}
         >
           Play Again
         </button>
@@ -243,4 +253,6 @@ export default function App() {
       </p>
     </div>
   );
-}
+};
+
+export default App;
