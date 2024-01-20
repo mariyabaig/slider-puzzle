@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { flattenArray } from "../utils"; // Import the flattenArray function from a utilities file
 import image1 from "../assets/image_part_001.jpg";
@@ -10,6 +10,7 @@ import image6 from "../assets/image_part_006.jpg";
 import image7 from "../assets/image_part_007.jpg";
 import image8 from "../assets/image_part_008.jpg";
 import image10 from "../assets/image_part_010.jpg";
+import "../index.css"; // Import the external stylesheet
 
 const Board = ({ onMove, onComplete, onReset, moves, puzzle, complete }) => {
   const getImageSource = (value) => {
@@ -70,7 +71,6 @@ const Board = ({ onMove, onComplete, onReset, moves, puzzle, complete }) => {
     }
   };
 
-  
   useEffect(() => {
     if (!puzzle.length) {
       onReset();
@@ -79,41 +79,17 @@ const Board = ({ onMove, onComplete, onReset, moves, puzzle, complete }) => {
 
   return (
     <div className="Board">
-      <h3>Moves: {moves}</h3>
-      <div
-        style={{
-          display: "inline-block",
-          backgroundColor: "black",
-          border: `5px solid ${complete ? "black" : "black"}`,
-          borderRadius: 5,
-          padding: 5,
-        }}
-      >
+      <h3 className="Moves">Moves: {moves}</h3>
+      <div className="PuzzleContainer">
         {puzzle.map((row, i) => (
-          <div
-            key={i}
-            style={{
-              display: "flex",
-            }}
-          >
+          <div className="PuzzleRow" key={i}>
             {row.map((col, j) => {
-              const color = col === 0 ? "transparent" : "crimson";
+              const color = col === 0 ? "PuzzlePieceEmpty" : "crimson";
               return (
                 <div
                   key={`${i}-${j}`}
                   onClick={() => movePiece(i, j)}
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    width: 77,
-                    height: 77,
-                    margin: 2,
-                    backgroundColor: color,
-                    borderRadius: 5,
-                    cursor: complete ? "not-allowed" : "pointer",
-                    userSelect: "none",
-                  }}
+                  className={`PuzzlePiece ${color}`}
                 >
                   <img
                     src={getImageSource(col)}
@@ -127,23 +103,11 @@ const Board = ({ onMove, onComplete, onReset, moves, puzzle, complete }) => {
         ))}
       </div>
 
-      <p style={{ textAlign: "center", marginTop: "20px" }}>
-        <button
-          style={{
-            margin: "2px",
-            padding: "10px 20px",
-            fontSize: "1rem",
-            backgroundColor: "#4CAF50",
-            color: "white",
-            border: "none",
-            borderRadius: "5px",
-            cursor: complete ? "not-allowed" : "pointer",
-          }}
-          onClick={onReset}
-        >
-          Play Again
+      <div className="ResetButton">
+        <button onClick={onReset} disabled={complete}>
+          Reshuffle
         </button>
-      </p>
+      </div>
     </div>
   );
 };

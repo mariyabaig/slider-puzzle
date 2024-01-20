@@ -1,8 +1,101 @@
 .App {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
-  height: 100vh; 
+  margin: 20px; /* Add margin for spacing */
 }
 
+.container {
+  max-width: 380px;
+  margin-left: 20px;
+  padding: 20px;
+  background-color: #cadff4;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  color: #070218; /* Gold text color */
+}
+
+.heading {
+ 
+  text-align: center;
+}
+
+.intro {
+  margin: 15px 0;
+  text-align: justify;
+}
+
+.section {
+  margin-bottom: 20px;
+}
+
+.subHeading {
+  color: #010c11; /* Sky Blue subheading color */
+}
+
+.list {
+  padding-left: 20px;
+}
+
+.footer {
+  text-align: center;
+  font-style: italic;
+  color: #010c11; ; /* Light gray footer color */
+}
+
+.Board {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.Moves {
+  margin-bottom: 20px;
+}
+
+.PuzzleContainer {
+  display: inline-block;
+  background-color: #000000; /* Dark blue background */
+  border: 5px solid #b1b0a9; /* Gold text color */
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.PuzzleRow {
+  display: flex;
+}
+
+.PuzzlePiece {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 77px;
+  height: 77px;
+  margin: 2px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.PuzzlePieceEmpty {
+  background-color: transparent;
+  cursor: not-allowed;
+}
+
+.ResetButton {
+  margin: 20px 0;
+}
+
+.ResetButton button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.ResetButton button:disabled {
+  background-color: #ccc; /* Light gray for disabled button */
+  cursor: not-allowed;
+}

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Board from "./components/Board";
 import { getShuffledPuzzle, isSolvable } from "./utils"; // Import necessary utility functions
+import Rules from "./components/Rules";
 
 const App = () => {
   const [puzzle, setPuzzle] = useState([]);
@@ -30,7 +31,7 @@ const App = () => {
 
   const handleComplete = () => {
     setComplete(true);
-     };
+  };
 
   const handleReset = () => {
     setComplete(false);
@@ -48,6 +49,7 @@ const App = () => {
         puzzle={puzzle}
         complete={complete}
       />
+      <Rules />
     </div>
   );
 };
