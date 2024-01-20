@@ -31,6 +31,7 @@ const App = () => {
 
   const handleComplete = () => {
     setComplete(true);
+    alert("You won")
   };
 
   const handleReset = () => {
