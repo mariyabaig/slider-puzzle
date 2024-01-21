@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { flattenArray } from "../utils"; 
 import image1 from "../assets/image_part_001.jpg";
@@ -9,10 +9,20 @@ import image5 from "../assets/image_part_005.jpg";
 import image6 from "../assets/image_part_006.jpg";
 import image7 from "../assets/image_part_007.jpg";
 import image8 from "../assets/image_part_008.jpg";
+import image9 from "../assets/image_part_009.jpg";
 import image10 from "../assets/image_part_010.jpg";
 import "../index.css";
 
 const Board = ({ onMove, onComplete, onReset, moves, puzzle, complete }) => {
+  const [currentImage, setCurrentImage] = useState(image10);
+
+  useEffect(() => {
+    if (complete) {
+      setCurrentImage(image9); 
+    } else {
+      setCurrentImage(image10);
+    }
+  }, [complete]);
   const getImageSource = (value) => {
     switch (value) {
       case 1:
@@ -32,11 +42,12 @@ const Board = ({ onMove, onComplete, onReset, moves, puzzle, complete }) => {
       case 8:
         return image8;
       case 0:
-        return image10;
+        return currentImage;
       default:
         return null;
     }
   };
+  
 
   const movePiece = (x, y) => {
     if (!complete) {
