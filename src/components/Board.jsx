@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
-import { flattenArray } from "../utils"; // Import the flattenArray function from a utilities file
+import { flattenArray } from "../utils"; 
 import image1 from "../assets/image_part_001.jpg";
 import image2 from "../assets/image_part_002.jpg";
 import image3 from "../assets/image_part_003.jpg";
@@ -10,7 +10,7 @@ import image6 from "../assets/image_part_006.jpg";
 import image7 from "../assets/image_part_007.jpg";
 import image8 from "../assets/image_part_008.jpg";
 import image10 from "../assets/image_part_010.jpg";
-import "../index.css"; // Import the external stylesheet
+import "../index.css";
 
 const Board = ({ onMove, onComplete, onReset, moves, puzzle, complete }) => {
   const getImageSource = (value) => {
