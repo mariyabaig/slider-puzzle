@@ -118,7 +118,7 @@ const Board = ({ onMove, onComplete, onReset, moves, puzzle, complete }) => {
         <button onClick={onReset} disabled={complete}>
           Reshuffle
         </button>
-        <button onClick={onReset} disabled={complete}>
+        <button onClick={onReset}>
           Play Again
         </button>
       </div>
