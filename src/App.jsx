@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Board from "./components/Board";
-import { getShuffledPuzzle, isSolvable } from "./utils"; // Import necessary utility functions
+import { getShuffledPuzzle, isSolvable } from "./utils";
 import Rules from "./components/Rules";
 import ConfettiExplosion from "react-confetti-explosion";
 

@@ -1,5 +1,5 @@
 
-import "../index.css"; // Import the external stylesheet
+import "../index.css"
 
 const Rules = () => {
   return (
