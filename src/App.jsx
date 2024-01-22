@@ -24,22 +24,22 @@ const App = () => {
     } while (!isSolvable(newPuzzle));
 
     return newPuzzle;
-  };
+  }
 
   const handleMove = (newPuzzle) => {
     setPuzzle(newPuzzle);
     setMoves(moves + 1);
-  };
+  }
 
   const handleComplete = () => {
     setComplete(true);
-  };
+  }
 
   const handleReset = () => {
     setComplete(false);
     setPuzzle(getPuzzle());
     setMoves(0);
-  };
+  }
 
   return (
     <>
@@ -61,7 +61,7 @@ const App = () => {
         <Rules />
       </div>
     </>
-  );
-};
+   )
+}
 
 export default App;

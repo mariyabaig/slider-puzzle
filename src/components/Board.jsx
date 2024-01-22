@@ -14,15 +14,15 @@ import image10 from "../assets/image_part_010.jpg";
 import "../index.css";
 
 const Board = ({ onMove, onComplete, onReset, moves, puzzle, complete }) => {
-  const [currentImage, setCurrentImage] = useState(image10);
+  const [currentImage, setCurrentImage] = useState(image10)
 
   useEffect(() => {
     if (complete) {
-      setCurrentImage(image9); 
+      setCurrentImage(image9) 
     } else {
-      setCurrentImage(image10);
+      setCurrentImage(image10)
     }
-  }, [complete]);
+  }, [complete])
   const getImageSource = (value) => {
     switch (value) {
       case 1:
@@ -46,24 +46,24 @@ const Board = ({ onMove, onComplete, onReset, moves, puzzle, complete }) => {
       default:
         return null;
     }
-  };
+  }
   
 
   const movePiece = (x, y) => {
     if (!complete) {
-      const emptySlot = checkNeighbours(x, y) || checkNeighbours(x, y, 2);
+      const emptySlot = checkNeighbours(x, y) || checkNeighbours(x, y, 2)
 
       if (emptySlot) {
-        const newPuzzle = puzzle.map((row) => [...row]);
+        const newPuzzle = puzzle.map((row) => [...row])
 
         newPuzzle[emptySlot.x][emptySlot.y] = puzzle[x][y];
         newPuzzle[x][y] = 0;
 
-        onMove(newPuzzle);
-        checkCompletion(newPuzzle);
+        onMove(newPuzzle)
+        checkCompletion(newPuzzle)
       }
     }
-  };
+  }
 
   const checkNeighbours = (x, y, d = 1) => {
     const neighbours = [
@@ -73,20 +73,20 @@ const Board = ({ onMove, onComplete, onReset, moves, puzzle, complete }) => {
       puzzle[x][y - d] === 0 && { x, y: y - d },
     ];
 
-    return neighbours.find((el) => el);
-  };
+    return neighbours.find((el) => el)
+  }
 
   const checkCompletion = (puzzle) => {
     if (flattenArray(puzzle).join("") === "123456780") {
-      onComplete();
+      onComplete()
     }
-  };
+  }
 
   useEffect(() => {
     if (!puzzle.length) {
-      onReset();
+      onReset()
     }
-  }, [puzzle, onReset]);
+  }, [puzzle, onReset])
 
   return (
     <div className="Board">
@@ -108,7 +108,7 @@ const Board = ({ onMove, onComplete, onReset, moves, puzzle, complete }) => {
                     style={{ width: "100%", height: "100%", borderRadius: 5 }}
                   />
                 </div>
-              );
+               )
             })}
           </div>
         ))}
@@ -123,8 +123,8 @@ const Board = ({ onMove, onComplete, onReset, moves, puzzle, complete }) => {
         </button>
       </div>
     </div>
-  );
-};
+   )
+}
 
 Board.propTypes = {
   onMove: PropTypes.func.isRequired,
@@ -133,6 +133,6 @@ Board.propTypes = {
   moves: PropTypes.number.isRequired,
   puzzle: PropTypes.array.isRequired,
   complete: PropTypes.bool.isRequired,
-};
+}
 
 export default Board;

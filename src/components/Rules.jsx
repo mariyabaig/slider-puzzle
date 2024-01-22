@@ -32,7 +32,7 @@ const Rules = () => {
       </div>
       <p className="footer">Have fun and enjoy the challenge!</p>
     </div>
-  );
-};
+  )
+}
 
 export default Rules;
