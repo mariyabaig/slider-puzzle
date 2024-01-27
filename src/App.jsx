@@ -6,39 +6,45 @@ import ConfettiExplosion from "react-confetti-explosion";
 
 
 const App = () => {
-  const [puzzle, setPuzzle] = useState([]);
-  const [complete, setComplete] = useState(false);
-  const [moves, setMoves] = useState(0);
+  const [puzzle, setPuzzle] = useState([])
+  const [complete, setComplete] = useState(false)
+  const [moves, setMoves] = useState(0)
 
   const getPuzzle = () => {
     let newPuzzle;
     do {
-      newPuzzle = getShuffledPuzzle();
-      const zeroPosition = newPuzzle.flat().indexOf(0);
+      newPuzzle = getShuffledPuzzle()
+      const zeroPosition = newPuzzle.flat().indexOf(0)
       const lastNumber = newPuzzle.flat().length - 1;
 
-      newPuzzle = newPuzzle.map((row) => row.slice());
+      newPuzzle = newPuzzle.map((row) => row.slice())
       newPuzzle[Math.floor(zeroPosition / 3)][zeroPosition % 3] =
         newPuzzle[Math.floor(lastNumber / 3)][lastNumber % 3];
       newPuzzle[Math.floor(lastNumber / 3)][lastNumber % 3] = 0;
-    } while (!isSolvable(newPuzzle));
+    } while (!isSolvable(newPuzzle))
 
     return newPuzzle;
   }
 
   const handleMove = (newPuzzle) => {
-    setPuzzle(newPuzzle);
-    setMoves(moves + 1);
+    setPuzzle(newPuzzle)
+    setMoves(moves + 1)
   }
 
   const handleComplete = () => {
-    setComplete(true);
+    setComplete(true)
   }
 
   const handleReset = () => {
-    setComplete(false);
-    setPuzzle(getPuzzle());
-    setMoves(0);
+    setComplete(false)
+    setPuzzle(getPuzzle())
+    setMoves(0)
+  }
+
+  
+  const handleReshuffle = () => {
+    setComplete(false)
+    setPuzzle(getPuzzle())
   }
 
   return (
@@ -57,6 +63,7 @@ const App = () => {
           moves={moves}
           puzzle={puzzle}
           complete={complete}
+          onReshuffle={handleReshuffle}
         />
         <Rules />
       </div>

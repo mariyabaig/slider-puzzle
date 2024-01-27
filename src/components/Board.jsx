@@ -13,8 +13,9 @@ import image9 from "../assets/image_part_009.jpg";
 import image10 from "../assets/image_part_010.jpg";
 import "../index.css";
 
-const Board = ({ onMove, onComplete, onReset, moves, puzzle, complete }) => {
+const Board = ({ onMove, onComplete, onReset, moves, puzzle, complete, onReshuffle }) => {
   const [currentImage, setCurrentImage] = useState(image10)
+  const [currentMoves, setCurrentMoves] = useState(moves)
 
   useEffect(() => {
     if (complete) {
@@ -81,7 +82,6 @@ const Board = ({ onMove, onComplete, onReset, moves, puzzle, complete }) => {
       onComplete()
     }
   }
-
   useEffect(() => {
     if (!puzzle.length) {
       onReset()
@@ -108,22 +108,20 @@ const Board = ({ onMove, onComplete, onReset, moves, puzzle, complete }) => {
                     style={{ width: "100%", height: "100%", borderRadius: 5 }}
                   />
                 </div>
-               )
+              )
             })}
           </div>
         ))}
       </div>
 
       <div className="ResetButton">
-        <button onClick={onReset} disabled={complete}>
+        <button onClick={onReshuffle} disabled={complete}>
           Reshuffle
         </button>
-        <button onClick={onReset}>
-          Play Again
-        </button>
+        <button onClick={onReset}>Play Again</button>
       </div>
     </div>
-   )
+  )
 }
 
 Board.propTypes = {
