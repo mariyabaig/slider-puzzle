@@ -6,7 +6,7 @@ const Rules = () => {
     <div className="container">
       <h2 className="heading">Rules of the Game</h2>
       <p className="intro">
-        Welcome to the Puzzle Game! The objective is to rearrange the puzzle
+        Welcome to the Game! The objective is to rearrange the puzzle
         pieces to reach the correct order.
       </p>
       <div className="section">

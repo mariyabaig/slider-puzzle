@@ -67,7 +67,7 @@
 .PuzzleContainer {
   display: inline-block;
   background-color: #000000; /* Dark blue background */
-  border: 5px solid #b1b0a9; /* Gold text color */
+  border: 5px solid #02093d; /* Gold text color */
   border-radius: 5px;
   padding: 5px;
 }
@@ -99,7 +99,7 @@
 .ResetButton button {
   padding: 10px 20px;
   font-size: 1rem;
-  background-color: #4CAF50;
+  background-color: #02093d;
   color: white;
   border: none;
   border-radius: 5px;
