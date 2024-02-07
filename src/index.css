@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 .App {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   margin: 20px; /* Add margin for spacing */
+  font-family: 'Roboto', sans-serif;
 }
 
 @media (max-width: 630px) {
