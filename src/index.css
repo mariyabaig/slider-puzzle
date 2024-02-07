@@ -21,10 +21,10 @@
 
 
 .container {
-  max-width: 380px;
+  max-width: 700px;
   margin-left: 20px;
   padding: 20px;
-  background-color: #cadff4;
+  background-color: #fcffc3;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   color: #070218; /* Gold text color */
